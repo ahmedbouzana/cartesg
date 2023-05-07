@@ -2,6 +2,6 @@
 <mat-grid-list cols="100" >
   <mat-grid-tile *ngFor="let tile of tiles" [colspan]="tile.cols" [rowspan]="tile.rows" [style.background]="tile.color"
   matTooltip="{{tile.text}}" [matTooltipShowDelay]="300" [matTooltipHideDelay]="0">
-    <mat-icon>dashboard</mat-icon>
+    <mat-icon>{{tile.icon}}</mat-icon>
   </mat-grid-tile>
 </mat-grid-list>
