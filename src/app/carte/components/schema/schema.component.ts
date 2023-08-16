@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 export interface Tile {
   tp: string;
@@ -54,7 +55,7 @@ export class SchemaComponent implements OnInit {
     let tile = this.tiles[cpt];
     this.tiles[cpt] = this.getObject(tile, this.et);
 
-    
+
 
     cpt = 5;
     tile = this.tiles[cpt];
@@ -78,13 +79,17 @@ export class SchemaComponent implements OnInit {
     this.tiles[cpt] = this.getObject(tile, this.ptInterAB);
   }
 
+  onClickGrid(tile: Tile, index:number): void {
+    console.log(index);
+  }
+
   getObject(tile: Tile, tp: string): Tile {
     let newTile: Tile = {
       tp: tp,
-      icon:tile.icon,
+      icon: tile.icon,
       cols: -1,
       rows: -1,
-      color: 'withe',
+      color: 'white',
       text: '',
       position: tile.position
     }
@@ -92,7 +97,7 @@ export class SchemaComponent implements OnInit {
     switch (tp) {
 
       case this.et:
-        newTile.icon='device_hub';
+        newTile.icon = 'device_hub';
         newTile.cols = this.unitCol;
         newTile.rows = this.unitRow;
         newTile.color = 'yellow';
@@ -101,7 +106,7 @@ export class SchemaComponent implements OnInit {
 
       case this.lgCont:
       case this.lgDis:
-        newTile.icon='square';
+        newTile.icon = 'square';
         newTile.cols = this.unitCol;
         newTile.rows = this.unitRow;
         newTile.color = 'orange';
@@ -109,7 +114,7 @@ export class SchemaComponent implements OnInit {
         break;
 
       case this.inter:
-        newTile.icon='device_hub';
+        newTile.icon = 'device_hub';
         newTile.cols = this.unitCol * 3;
         newTile.rows = this.unitRow * 3;
         newTile.color = 'green';
@@ -120,7 +125,7 @@ export class SchemaComponent implements OnInit {
       case this.ptInterAB:
       case this.ptSInterDP:
       case this.ptSInterAB:
-        newTile.icon='arrow_drop_up';
+        newTile.icon = 'arrow_drop_up';
         newTile.cols = this.unitCol * 5;
         newTile.rows = this.unitRow * 5;
         newTile.color = 'gray';
