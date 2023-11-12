@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 export interface Tile {
   tp: string;
@@ -14,7 +13,8 @@ export interface Tile {
 @Component({
   selector: 'app-schema',
   templateUrl: './schema.component.html',
-  styleUrls: ['./schema.component.css']
+  styleUrls: ['./schema.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SchemaComponent implements OnInit {
 
@@ -37,6 +37,11 @@ export class SchemaComponent implements OnInit {
   ptSInterAB = 'ptSInterAB';
 
   constructor() { }
+  
+  trackSchema(index: any, shm: Tile) {
+    return shm ? shm.position : undefined;
+  }
+  
 
   ngOnInit(): void {
     for (let i = 0; i < 10000; i++) {
@@ -79,9 +84,20 @@ export class SchemaComponent implements OnInit {
     this.tiles[cpt] = this.getObject(tile, this.ptInterAB);
   }
 
-  onClickGrid(tile: Tile, index:number): void {
+  // onClickGrid(tile: Tile, index: number): void {
+  //   console.log(index);
+  //   const ti = this.tiles[index];
+  //   this.tiles[index] = this.getObject(ti, this.et);
+  // }
+  
+  onClickGrid(tile: Tile, index: number): void {
     console.log(index);
+    const updatedTiles = [...this.tiles];
+    const ti = updatedTiles[index];
+    updatedTiles[index] = this.getObject(ti, this.et);
+    this.tiles = updatedTiles;
   }
+  
 
   getObject(tile: Tile, tp: string): Tile {
     let newTile: Tile = {
